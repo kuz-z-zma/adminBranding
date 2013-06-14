@@ -9,7 +9,7 @@
  */
  
 $plugin_is_filter = 5|ADMIN_PLUGIN;
-$plugin_description = gettext("Change the Zenphoto logo on the backend into a custom logo.");
+$plugin_description = gettext("Replace the default Zenphoto logo on the backend with a custom logo.");
 $plugin_author = "Fred Sondaar (fretzl)";
 
 $option_interface = 'zpBranding';
