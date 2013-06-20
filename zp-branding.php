@@ -17,13 +17,7 @@ $option_interface = 'zpBranding';
 zp_register_filter('admin_head', 'zpBranding::customZpLogo');
 
 class zpBranding {
-	/*
-	function checkForFile() {
-		$path = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/zp-admin-logo';
-		$matching = safe_glob($path . ".*");
-		return $matching;
-		}
-	*/	
+	
 	function __construct() {
 		$path = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/zp-admin-logo';
 		$matching = safe_glob($path . ".*");
@@ -75,18 +69,10 @@ class zpBranding {
 					$w_aspect = $width/$height;
 					$h_aspect = $height/$width;
 					
-					if(getOption('width') !== $width) {
 					$new_width = getOption('width');
 					$new_height = round($new_width*$h_aspect, 2);
 					setOption('height', $new_height);
-					}
-					
-					//if(getOption('height') !== $height) {
-					//$new_height = getOption('height');
-					//$new_width = round($new_height*$w_aspect);
-					//setOption('width', $new_width);
-					//}
-					
+
 					?>
 					<script type="text/javascript">
 					// <!-- <![CDATA[
