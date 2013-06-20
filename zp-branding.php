@@ -9,7 +9,7 @@
  */
  
 $plugin_is_filter = 5|ADMIN_PLUGIN;
-$plugin_description = gettext("Replace the default Zenphoto logo on the backend with a custom logo.");
+$plugin_description = gettext_pl("Replace the default Zenphoto logo on the backend with a custom logo.",'zp-branding');
 $plugin_author = "Fred Sondaar (fretzl)";
 
 $option_interface = 'zpBranding';
@@ -17,7 +17,13 @@ $option_interface = 'zpBranding';
 zp_register_filter('admin_head', 'zpBranding::customZpLogo');
 
 class zpBranding {
-
+	/*
+	function checkForFile() {
+		$path = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/zp-admin-logo';
+		$matching = safe_glob($path . ".*");
+		return $matching;
+		}
+	*/	
 	function __construct() {
 		$path = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/zp-admin-logo';
 		$matching = safe_glob($path . ".*");
@@ -26,26 +32,26 @@ class zpBranding {
 			$file = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
 			list($width, $height) = getimagesize($file);
 			setOptionDefault('width', $width);
-			setOptionDefault('height', $height);
+			//setOptionDefault('height', $height);
 			setOptionDefault('restore', 0);
 			} else { ?>
 				<div class="errorbox">
-				<?php echo gettext('No image found.'); exitZP(); ?>
+				<?php echo gettext_pl('No image found.'); exitZP(); ?>
 				</div>
 			<?php
 			}	
 	}
 	
 	function getOptionsSupported() {
-		return array(	gettext('Width') => array('key' => 'width', 'type' => OPTION_TYPE_TEXTBOX,
+		return array(	gettext_pl('Width','zp-branding') => array('key' => 'width', 'type' => OPTION_TYPE_TEXTBOX,
 										'order'=> 1,
-										'desc' => gettext('The width of the image (px). Default is the original width.')),
-						gettext('Height') => array('key' => 'height', 'type' => OPTION_TYPE_TEXTBOX,
-										'order'=> 2,
-										'desc' => gettext('The height of the image (px). Default is the original height.')),
-						gettext('Reset') => array('key' => 'restore', 'type' => OPTION_TYPE_CHECKBOX,
+										'desc' => gettext_pl('The width of the image (px). (the height is proportional)','zp-branding')),
+						//gettext_pl('Height','zp-branding') => array('key' => 'height', 'type' => OPTION_TYPE_TEXTBOX,
+						//				'order'=> 2,
+						//				'desc' => gettext_pl('The height of the image (px). Default is the original height.','zp-branding')),
+						gettext_pl('Reset','zp-branding') => array('key' => 'restore', 'type' => OPTION_TYPE_CHECKBOX,
 										'order'=> 3,
-										'desc' => gettext('Reset to the original width and height.'))
+										'desc' => gettext_pl('Reset to the original width.','zp-branding'))
 		);
 	}
 	
@@ -60,8 +66,27 @@ class zpBranding {
 				if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
 					$file = WEBPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
 					$new_src = $file;
-					$new_title = sprintf(gettext('%1$s administration'),html_encode($_zp_gallery->getTitle()),html_encode($_zp_admin_tab));
-					$new_alt = sprintf(gettext('%1$s administration'), html_encode($_zp_gallery->getTitle()));
+					$new_title = sprintf(gettext_pl('%1$s administration','zp-branding'),html_encode($_zp_gallery->getTitle()),html_encode($_zp_admin_tab));
+					$new_alt = sprintf(gettext_pl('%1$s administration','zp-branding'), html_encode($_zp_gallery->getTitle()));
+					
+					$file = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
+					list($width, $height) = getimagesize($file);
+					
+					$w_aspect = $width/$height;
+					$h_aspect = $height/$width;
+					
+					if(getOption('width') !== $width) {
+					$new_width = getOption('width');
+					$new_height = round($new_width*$h_aspect, 2);
+					setOption('height', $new_height);
+					}
+					
+					//if(getOption('height') !== $height) {
+					//$new_height = getOption('height');
+					//$new_width = round($new_height*$w_aspect);
+					//setOption('width', $new_width);
+					//}
+					
 					?>
 					<script type="text/javascript">
 					// <!-- <![CDATA[
@@ -70,21 +95,21 @@ class zpBranding {
 							.prop("src","<?php echo $new_src; ?>")
 							.prop("title","<?php echo $new_title; ?>")
 							.prop("alt","<?php echo $new_alt; ?>")
-							.css({'width':'<?php echo getOption("width"); ?>', 'height':'<?php echo getOption("height"); ?>'});
+							.css({'width':'<?php echo $new_width; ?>', 'height':'<?php echo $new_height; ?>'});
 						});
 					// ]]> -->
 					</script>
 					<?php
 					} else { ?>
 						<div class="errorbox">
-						<?php echo gettext('No valid file type found.'); ?>
+						<?php echo gettext_pl('No valid file type found.','zp-branding'); ?>
 						</div>
 					<?php
 					}
 			} else { 
 				if (count($matching) > 1) { ?>
 				<div class="errorbox">
-				<?php echo gettext('ERROR: There is more than one file with the name <code>zp-admin-logo</code>'); ?>
+				<?php echo gettext_pl('ERROR: There is more than one file with the name <code>zp-admin-logo</code>','zp-branding'); ?>
 				</div>
 			<?php
 			}
