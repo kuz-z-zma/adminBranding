@@ -7,22 +7,23 @@
  * @package plugins
  * @subpackage admin
  */
- 
+
 $plugin_is_filter = 5|ADMIN_PLUGIN;
 $plugin_description = gettext_pl("Replace the default Zenphoto logo on the backend with a custom logo.",'zp-branding');
 $plugin_author = "Fred Sondaar (fretzl)";
+$plugin_version = '1.0';
 
 $option_interface = 'zpBranding';
 
 zp_register_filter('admin_head', 'zpBranding::customZpLogo');
 
 class zpBranding {
-	
+
 	function __construct() {
 		$path = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/zp-admin-logo';
 		$matching = safe_glob($path . ".*");
 		if (count($matching) !== 0) {
-			$path_parts = pathinfo(array_shift($matching)); 
+			$path_parts = pathinfo(array_shift($matching));
 			$file = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
 			list($width, $height) = getimagesize($file);
 			setOptionDefault('width', $width);
@@ -33,9 +34,9 @@ class zpBranding {
 				<?php echo gettext_pl('No image found.'); exitZP(); ?>
 				</div>
 			<?php
-			}	
+			}
 	}
-	
+
 	function getOptionsSupported() {
 		return array(	gettext_pl('Width','zp-branding') => array('key' => 'width', 'type' => OPTION_TYPE_TEXTBOX,
 										'order'=> 1,
@@ -48,27 +49,27 @@ class zpBranding {
 										'desc' => gettext_pl('Reset to the original width.','zp-branding'))
 		);
 	}
-	
+
 	static function customZpLogo() {
 		global $_zp_current_admin_obj,$_zp_admin_tab,$_zp_admin_subtab,$_zp_gallery;
 		if (zp_loggedin(ADMIN_RIGHTS)) {
 		$path = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/zp-admin-logo';
 		$matching = safe_glob($path . ".*");
 		if (count($matching) == 1) { // check if there is more than one file with the name "zp-admin-logo".
-			$path_parts = pathinfo(array_shift($matching)); 
+			$path_parts = pathinfo(array_shift($matching));
 			$ext = $path_parts['extension'];
 				if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
 					$file = WEBPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
 					$new_src = $file;
 					$new_title = sprintf(gettext_pl('%1$s administration','zp-branding'),html_encode($_zp_gallery->getTitle()),html_encode($_zp_admin_tab));
 					$new_alt = sprintf(gettext_pl('%1$s administration','zp-branding'), html_encode($_zp_gallery->getTitle()));
-					
+
 					$file = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
 					list($width, $height) = getimagesize($file);
-					
+
 					$w_aspect = $width/$height;
 					$h_aspect = $height/$width;
-					
+
 					$new_width = getOption('width');
 					$new_height = round($new_width*$h_aspect, 2);
 					setOption('height', $new_height);
@@ -92,21 +93,21 @@ class zpBranding {
 						</div>
 					<?php
 					}
-			} else { 
+			} else {
 				if (count($matching) > 1) { ?>
 				<div class="errorbox">
 				<?php echo gettext_pl('ERROR: There is more than one file with the name <code>zp-admin-logo</code>','zp-branding'); ?>
 				</div>
 			<?php
 			}
-			}					
+			}
 		}
 	}
-	
+
 	function handleOptionSave() {
 		$path = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/zp-admin-logo';
 		$matching = safe_glob($path . ".*");
-		$path_parts = pathinfo(array_shift($matching)); 
+		$path_parts = pathinfo(array_shift($matching));
 		$file = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
 		list($width, $height) = getimagesize($file);
 		if (getOption('restore')) {
