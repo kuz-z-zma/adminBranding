@@ -11,7 +11,7 @@
 $plugin_is_filter = 5|ADMIN_PLUGIN;
 $plugin_description = gettext_pl("Replace the default Zenphoto logo on the backend with a custom logo.",'zp-branding');
 $plugin_author = "Fred Sondaar (fretzl)";
-$plugin_version = '1.0';
+$plugin_version = '1.2';
 
 $option_interface = 'zpBranding';
 
@@ -41,9 +41,6 @@ class zpBranding {
 		return array(	gettext_pl('Width','zp-branding') => array('key' => 'width', 'type' => OPTION_TYPE_TEXTBOX,
 										'order'=> 1,
 										'desc' => gettext_pl('The width of the image (px). (the height is proportional)','zp-branding')),
-						//gettext_pl('Height','zp-branding') => array('key' => 'height', 'type' => OPTION_TYPE_TEXTBOX,
-						//				'order'=> 2,
-						//				'desc' => gettext_pl('The height of the image (px). Default is the original height.','zp-branding')),
 						gettext_pl('Reset','zp-branding') => array('key' => 'restore', 'type' => OPTION_TYPE_CHECKBOX,
 										'order'=> 3,
 										'desc' => gettext_pl('Reset to the original width.','zp-branding'))
@@ -60,29 +57,25 @@ class zpBranding {
 			$ext = $path_parts['extension'];
 				if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
 					$file = WEBPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
-					$new_src = $file;
-					$new_title = sprintf(gettext_pl('%1$s administration','zp-branding'),html_encode($_zp_gallery->getTitle()),html_encode($_zp_admin_tab));
-					$new_alt = sprintf(gettext_pl('%1$s administration','zp-branding'), html_encode($_zp_gallery->getTitle()));
+					$title = $alt = sprintf(gettext_pl('%1$s administration','zp-branding'),html_encode($_zp_gallery->getTitle()));
 
-					$file = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
 					list($width, $height) = getimagesize($file);
 
-					$w_aspect = $width/$height;
-					$h_aspect = $height/$width;
-
-					$new_width = getOption('width');
-					$new_height = round($new_width*$h_aspect, 2);
-					setOption('height', $new_height);
+					if ( !empty(getOption('width')) ) {
+						$new_width = getOption('width');
+						} else {
+						$new_width = $width;
+					}
 
 					?>
 					<script type="text/javascript">
 					// <!-- <![CDATA[
 						$(document).ready(function(){
 							$('#administration img#logo')
-							.prop("src","<?php echo $new_src; ?>")
-							.prop("title","<?php echo $new_title; ?>")
-							.prop("alt","<?php echo $new_alt; ?>")
-							.css({'width':'<?php echo $new_width; ?>', 'height':'<?php echo $new_height; ?>'});
+							.prop("src","<?php echo $file; ?>")
+							.prop("title","<?php echo $title; ?>")
+							.prop("alt","<?php echo $alt; ?>")
+							.css({'width':'<?php echo $new_width; ?>', 'height':'auto'});
 						});
 					// ]]> -->
 					</script>
@@ -112,7 +105,6 @@ class zpBranding {
 		list($width, $height) = getimagesize($file);
 		if (getOption('restore')) {
 			setOption('width', $width);
-			setOption('height', $height);
 			purgeOption('restore');
 		}
 	}
