@@ -25,13 +25,13 @@ class zpBranding {
 		if (count($matching) !== 0) {
 			$path_parts = pathinfo(array_shift($matching));
 			$file = SERVERPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
-			list($width, $height) = getimagesize($file);
+			list($width) = getimagesize($file);
 			setOptionDefault('width', $width);
 			//setOptionDefault('height', $height);
 			setOptionDefault('restore', 0);
 			} else { ?>
 				<div class="errorbox">
-				<?php echo gettext_pl('No image found.'); exitZP(); ?>
+				<?php echo gettext_pl('No image found.', 'zp-branding'); exitZP(); ?>
 				</div>
 			<?php
 			}
@@ -56,15 +56,16 @@ class zpBranding {
 			$path_parts = pathinfo(array_shift($matching));
 			$ext = $path_parts['extension'];
 				if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
-					$file = WEBPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
-					$title = $alt = sprintf(gettext_pl('%1$s administration','zp-branding'),html_encode($_zp_gallery->getTitle()));
+					$file = FULLWEBPATH.'/'.USER_PLUGIN_FOLDER.'/zp-branding/'.$path_parts['basename'];
+					$title = $alt = html_encode($_zp_gallery->getTitle() . ' ' . gettext_pl('administration', 'zp-branding'));
 
-					list($width, $height) = getimagesize($file);
+					list($width) = getimagesize($file);
 
-					if ( !empty(getOption('width')) ) {
+					if ( getOption('width') ) {
 						$new_width = getOption('width');
 						} else {
 						$new_width = $width;
+						setOption('width', $width);
 					}
 
 					?>
@@ -75,7 +76,7 @@ class zpBranding {
 							.prop("src","<?php echo $file; ?>")
 							.prop("title","<?php echo $title; ?>")
 							.prop("alt","<?php echo $alt; ?>")
-							.css({'width':'<?php echo $new_width; ?>', 'height':'auto'});
+							.css({'width':'<?php echo $new_width; ?>px', 'height':'auto'});
 						});
 					// ]]> -->
 					</script>

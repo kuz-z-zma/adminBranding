@@ -9,7 +9,7 @@ Name the image <code>zp-admin-logo</code> and place it in the <code>/plugins/zp-
 
 The default size of your logo will be the original size of your image.
 
-You can change the size in the options.
+You can change the width in the options.
 
 
 
