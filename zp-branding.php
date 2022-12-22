@@ -69,8 +69,7 @@ class zpBranding {
 					}
 
 					?>
-					<script type="text/javascript">
-					// <!-- <![CDATA[
+					<script>
 						$(document).ready(function(){
 							$('#administration img#logo')
 							.prop("src","<?php echo $file; ?>")
@@ -78,7 +77,6 @@ class zpBranding {
 							.prop("alt","<?php echo $alt; ?>")
 							.css({'width':'<?php echo $new_width; ?>px', 'height':'auto'});
 						});
-					// ]]> -->
 					</script>
 					<?php
 					} else { ?>
