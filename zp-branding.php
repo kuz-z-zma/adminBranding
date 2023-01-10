@@ -15,7 +15,7 @@ $plugin_category = gettext('Admin');
 $plugin_version = '1.3';
 $option_interface = 'zpBranding';
 
-zp_register_filter('admin_head', 'zpBranding::customZpLogo');
+zp_register_filter('admin_head', 'zpBranding::customZpLogo', 999);
 
 class zpBranding {
 
@@ -70,13 +70,11 @@ class zpBranding {
 
 					?>
 					<script>
-						$(document).ready(function(){
-							$('#administration img#logo')
-							.prop("src","<?php echo $file; ?>")
-							.prop("title","<?php echo $title; ?>")
-							.prop("alt","<?php echo $alt; ?>")
-							.css({'width':'<?php echo $new_width; ?>px', 'height':'auto'});
-						});
+					document.addEventListener("DOMContentLoaded", function(event) { 
+					  var adminlogo = document.getElementById('logo'); 
+					  adminlogo.src = '<?php echo $file; ?>';
+					  adminlogo.setAttribute('style', 'width: <?php echo $new_width; ?>px; height: auto;');
+					});
 					</script>
 					<?php
 					} else { ?>
