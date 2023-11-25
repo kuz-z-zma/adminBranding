@@ -1,5 +1,5 @@
-AdminCustomLogo
-===============
+zp-branding
+===========
 
 Replace the default Zenphoto logo on the backend with a custom logo.
 
