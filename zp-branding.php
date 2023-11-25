@@ -16,7 +16,7 @@ $plugin_version = '1.3';
 $plugin_category = gettext('Admin');
 $option_interface = 'zpBranding';
 
-zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo', 999);
+zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
 
 class zpBranding {
 	
@@ -24,25 +24,32 @@ class zpBranding {
 		purgeOption('width');// older version option name
 		purgeOption('restore');// older version option name
 		setOptionDefault('zpbranding-width', '200');
+		setThemeOptionDefault('zpbranding_customcss', '');
 	}
 
 	function getOptionsSupported() {
 		$logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
 		$width = getimagesize($logo)[0];
-		$options = array(gettext('Width') => array('key' => 'zpbranding-width', 'type' => OPTION_TYPE_TEXTBOX,
-						'order'=> 1,
-						'desc' => gettext_pl('The width of the image (px). The height is proportional.', 'zp-branding'))
-		);
-		if ( getOption('zpbranding-width') != $width ) {
-			$options[gettext('Reset')] = array('key' => 'zpbranding-restore', 'type' => OPTION_TYPE_CHECKBOX,
-					'order'=> 3,
+		$options = array(    
+				gettext_pl('Width', 'zp-branding') => array('key' => 'zpbranding-width', 'type' => OPTION_TYPE_TEXTBOX,
+					'order'=> 1,
+					'desc' => gettext_pl('The width of the image (px). The height is proportional.', 'zp-branding')),
+				gettext_pl('Custom CSS', 'zp-branding') => array('key' => 'zpbranding_customcss', 'type' => OPTION_TYPE_TEXTAREA, 
+					'order' => 3,
+					'multilingual' => 0,
+					'desc' => gettext_pl('Enter custom CSS to alter the appearance of the admin area.<br> It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'zp-branding'))
+			);
+			if ( getOption('zpbranding-width') != $width ) {
+				$options[gettext_pl('Reset', 'zp-branding')] = array('key' => 'zpbranding-restore', 'type' => OPTION_TYPE_CHECKBOX,
+					'order' => 2,
 					'desc' => gettext_pl('Reset to the original width.', 'zp-branding'));
-		}				
+			}				
 		return $options;
 	}
 
 	static function printCustomZpLogo() {
 		$logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
+		$relativeLogo = str_replace( FULLWEBPATH, '..', $logo );
 		if (getimagesize($logo)) {// Check if file is image
 			$width = getimagesize($logo)[0];
 			$height = getimagesize($logo)[1];
@@ -66,9 +73,14 @@ class zpBranding {
 				width: <?php echo $new_width; ?>px;
 				height: <?php echo $height; ?>px;
 				margin: 20px 10px 0px 30px;
-				background: url(<?php echo $logo; ?>) no-repeat 0 0;
+				background: url(<?php echo $relativeLogo; ?>) no-repeat 0 0;
 				background-size: <?php echo $new_width; ?>px;
 			}
+			<?php
+			if ( !empty(getOption('zpbranding_customcss')) ) {
+				echo "\n/** Custom CSS **/\n" . getOption('zpbranding_customcss') . "\n" . "/****************/" . "\n";
+			}
+			?>
 			</style>
 			<script>
 			document.addEventListener('DOMContentLoaded', function() { 
