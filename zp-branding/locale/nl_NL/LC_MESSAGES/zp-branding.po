@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: zp-branding\n"
+"POT-Creation-Date: 2023-01-16 17:11+0100\n"
+"PO-Revision-Date: 2023-01-22 22:44+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-KeywordsList: ;gettext_pl\n"
+"X-Poedit-SearchPath-0: zp-branding.php\n"
+
+#: zp-branding.php:13
+msgid "Replace the default Zenphoto logo on the backend with a custom logo."
+msgstr "Vervang het standaard Zenphoto logo door een eigen logo."
+
+#: zp-branding.php:32
+msgid "The width of the image (px). The height is proportional."
+msgstr "De breedte van het logo (px). De hoogte is propotioneel."
+
+#: zp-branding.php:35
+msgid "Reset to the original width."
+msgstr "Herstel de oorspronkelijke breedte van het eigen logo."
+
+#: zp-branding.php:76
+#, php-format
+msgid "Image not found: file <i>%s</i> does not exist."
+msgstr "Bestand niet gevonden: <i>%s</i> bestaat niet."
