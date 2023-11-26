@@ -14,11 +14,14 @@ $plugin_description = gettext_pl("Replace the default Zenphoto logo on the backe
 $plugin_author = "Fred Sondaar (fretzl)";
 $plugin_version = '1.3';
 $plugin_category = gettext('Admin');
-$option_interface = 'zpBranding';
+$option_interface = 'zpBrandingOptions';
 
 zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
 
-class zpBranding {
+global $zp_branding_logo;
+$zp_branding_logo = SERVERPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
+
+class zpBrandingOptions {
 	
 	function __construct() {
 		purgeOption('width');// older version option name
@@ -27,32 +30,51 @@ class zpBranding {
 		setThemeOptionDefault('zpbranding_customcss', '');
 	}
 
-	function getOptionsSupported() {
-		$logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
-		$width = getimagesize($logo)[0];
-		$options = array(    
-				gettext_pl('Width', 'zp-branding') => array('key' => 'zpbranding-width', 'type' => OPTION_TYPE_TEXTBOX,
-					'order'=> 1,
-					'desc' => gettext_pl('The width of the image (px). The height is proportional.', 'zp-branding')),
-				gettext_pl('Custom CSS', 'zp-branding') => array('key' => 'zpbranding_customcss', 'type' => OPTION_TYPE_TEXTAREA, 
-					'order' => 3,
-					'multilingual' => 0,
-					'desc' => gettext_pl('Enter custom CSS to alter the appearance of the admin area.<br> It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'zp-branding'))
-			);
-			if ( getOption('zpbranding-width') != $width ) {
-				$options[gettext_pl('Reset', 'zp-branding')] = array('key' => 'zpbranding-restore', 'type' => OPTION_TYPE_CHECKBOX,
-					'order' => 2,
-					'desc' => gettext_pl('Reset to the original width.', 'zp-branding'));
-			}				
+	static function getOptionsSupported() {
+		global $zp_branding_logo;
+		if ( $zp_branding_logo ) {
+			$width = getimagesize($zp_branding_logo)[0];
+			$options = array(    
+					gettext_pl('Width', 'zp-branding') => array('key' => 'zpbranding-width', 'type' => OPTION_TYPE_TEXTBOX,
+						'order'=> 1,
+						'desc' => gettext_pl('The width of the image (px). The height is proportional.', 'zp-branding')),
+					gettext_pl('Custom CSS', 'zp-branding') => array('key' => 'zpbranding_customcss', 'type' => OPTION_TYPE_TEXTAREA, 
+						'order' => 3,
+						'multilingual' => 0,
+						'desc' => gettext_pl('Enter custom CSS to alter the appearance of the admin area.<br> It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'zp-branding'))
+				);
+				if ( getOption('zpbranding-width') != $width ) {
+					$options[gettext_pl('Reset', 'zp-branding')] = array('key' => 'zpbranding-restore', 'type' => OPTION_TYPE_CHECKBOX,
+						'order' => 2,
+						'desc' => gettext_pl('Reset to the original width.', 'zp-branding'));
+				}				
 		return $options;
+		} else { ?>
+			<div class="errorbox">
+			<?php echo sprintf(gettext_pl("Image <i>%s</i> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
+			</div>
+		<?php
+		}
 	}
+	
+	function handleOptionSave() {
+		global $zp_branding_logo;
+		$width = getimagesize($zp_branding_logo)[0];
+		if (getOption('zpbranding-restore')) {
+			setOption('zpbranding-width', $width);
+			setOption('zpbranding-restore', 0);
+		}
+	}
+}
+
+class zpBranding {
 
 	static function printCustomZpLogo() {
-		$logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
-		$relativeLogo = str_replace( FULLWEBPATH, '..', $logo );
-		if (getimagesize($logo)) {// Check if file is image
-			$width = getimagesize($logo)[0];
-			$height = getimagesize($logo)[1];
+		global $zp_branding_logo;
+		$relativeLogo = str_replace( SERVERPATH, '..', $zp_branding_logo );
+		if (getimagesize($zp_branding_logo)) {// Check if file is image
+			$width = getimagesize($zp_branding_logo)[0];
+			$height = getimagesize($zp_branding_logo)[1];
 			$ratio = round($height / $width, 2);
 			setOptionDefault('zpbranding-width', $width);
 			setOptionDefault('zpbranding-restore', 0);
@@ -90,19 +112,9 @@ class zpBranding {
 			<?php
 		} else { ?>
 			<div class="errorbox">
-			<?php echo sprintf(gettext_pl("Image not found: file <i>%s</i> does not exist.", 'zp-branding'), substr($logo, strrpos($logo, '/') + 1)); ?>
+			<?php echo sprintf(gettext_pl("Image <i>%s</i> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
 			</div>
 		<?php
-		}
-	}
- 
-
-	function handleOptionSave() {
-		$logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
-		$width = getimagesize($logo)[0];
-		if (getOption('zpbranding-restore')) {
-			setOption('zpbranding-width', $width);
-			setOption('zpbranding-restore', 0);
 		}
 	}
 }
