@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zp-branding\n"
-"POT-Creation-Date: 2023-01-16 17:11+0100\n"
-"PO-Revision-Date: 2023-01-22 22:44+0100\n"
+"POT-Creation-Date: 2023-11-26 14:27+0100\n"
+"PO-Revision-Date: 2023-11-26 14:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -10,24 +10,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
-"X-Poedit-Basepath: ../..\n"
+"X-Generator: Poedit 3.4.1\n"
+"X-Poedit-Basepath: ../../../..\n"
 "X-Poedit-KeywordsList: ;gettext_pl\n"
-"X-Poedit-SearchPath-0: zp-branding.php\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #: zp-branding.php:13
 msgid "Replace the default Zenphoto logo on the backend with a custom logo."
 msgstr "Vervang het standaard Zenphoto logo door een eigen logo."
 
-#: zp-branding.php:32
+#: zp-branding.php:38
+msgid "Width"
+msgstr "Breedte"
+
+#: zp-branding.php:40
 msgid "The width of the image (px). The height is proportional."
 msgstr "De breedte van het logo (px). De hoogte is propotioneel."
 
-#: zp-branding.php:35
+#: zp-branding.php:41
+msgid "Custom CSS"
+msgstr "Custom CSS"
+
+#: zp-branding.php:44
+msgid ""
+"Enter custom CSS to alter the appearance of the admin area.<br> It is "
+"printed between &lt;style&gt; tags in the &lt;head&gt; section."
+msgstr ""
+"Custom CSS om het uiterlijk van de backend te veranderen.<br> Het wordt "
+"geprint tussen &lt;style&gt; tags in het &lt;head&gt; gedeelte."
+
+#: zp-branding.php:47
+msgid "Reset"
+msgstr "Reset"
+
+#: zp-branding.php:49
 msgid "Reset to the original width."
 msgstr "Herstel de oorspronkelijke breedte van het eigen logo."
 
-#: zp-branding.php:76
+#: zp-branding.php:54 zp-branding.php:115
 #, php-format
-msgid "Image not found: file <i>%s</i> does not exist."
-msgstr "Bestand niet gevonden: <i>%s</i> bestaat niet."
+msgid "Image <i>%s</i> does not exist."
+msgstr "Afbeelding <i>%s</i> bestaat niet."
