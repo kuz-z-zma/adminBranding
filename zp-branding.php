@@ -12,13 +12,12 @@
 $plugin_is_filter = 5|ADMIN_PLUGIN;
 $plugin_description = gettext_pl("Replace the default Zenphoto logo on the backend with a custom logo.", 'zp-branding');
 $plugin_author = "Fred Sondaar (fretzl)";
-$plugin_version = '1.3';
+$plugin_version = '1.4';
 $plugin_category = gettext('Admin');
 $option_interface = 'zpBrandingOptions';
 
 zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
 
-global $zp_branding_logo;
 $zp_branding_logo = SERVERPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
 
 class zpBrandingOptions {
