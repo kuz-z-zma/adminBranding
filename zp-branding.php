@@ -18,7 +18,7 @@ $option_interface = 'zpBrandingOptions';
 
 zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
 
-$zp_branding_logo = SERVERPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
+$zp_branding_logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
 
 class zpBrandingOptions {
 	
@@ -46,7 +46,7 @@ class zpBrandingOptions {
 					$options[gettext_pl('Reset', 'zp-branding')] = array('key' => 'zpbranding-restore', 'type' => OPTION_TYPE_CHECKBOX,
 						'order' => 2,
 						'desc' => gettext_pl('Reset to the original width.', 'zp-branding'));
-				}				
+				}			
 		return $options;
 		} else { ?>
 			<div class="errorbox">
@@ -70,7 +70,7 @@ class zpBranding {
 
 	static function printCustomZpLogo() {
 		global $zp_branding_logo;
-		$relativeLogo = str_replace( SERVERPATH, '..', $zp_branding_logo );
+		$relativeLogo = str_replace( FULLWEBPATH, '..', $zp_branding_logo );
 		if (getimagesize($zp_branding_logo)) {// Check if file is image
 			$width = getimagesize($zp_branding_logo)[0];
 			$height = getimagesize($zp_branding_logo)[1];
