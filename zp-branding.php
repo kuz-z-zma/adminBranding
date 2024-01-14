@@ -18,6 +18,8 @@ $option_interface = 'zpBrandingOptions';
 
 zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
 
+$zp_branding_logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
+
 class zpBrandingOptions {
 	
 	function __construct() {
@@ -28,7 +30,7 @@ class zpBrandingOptions {
 	}
 
 	static function getOptionsSupported() {
-		$zp_branding_logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
+		global $zp_branding_logo;
 		if ( $zp_branding_logo ) {
 			$width = getimagesize($zp_branding_logo)[0];
 			$options = array(    
@@ -55,7 +57,7 @@ class zpBrandingOptions {
 	}
 	
 	function handleOptionSave() {
-		$zp_branding_logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
+		global $zp_branding_logo;
 		$width = getimagesize($zp_branding_logo)[0];
 		if (getOption('zpbranding-restore')) {
 			setOption('zpbranding-width', $width);
@@ -67,8 +69,7 @@ class zpBrandingOptions {
 class zpBranding {
 
 	static function printCustomZpLogo() {
-		$zp_branding_logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
-		$relativeLogo = str_replace( FULLWEBPATH, '..', $zp_branding_logo );
+		global $zp_branding_logo;
 		if (getimagesize($zp_branding_logo)) {// Check if file is image
 			$width = getimagesize($zp_branding_logo)[0];
 			$height = getimagesize($zp_branding_logo)[1];
@@ -92,7 +93,7 @@ class zpBranding {
 				width: <?php echo $new_width; ?>px;
 				height: <?php echo $height; ?>px;
 				margin: 20px 10px 0px 30px;
-				background: url(<?php echo $relativeLogo; ?>) no-repeat 0 0;
+				background: url(<?php echo $zp_branding_logo; ?>) no-repeat 0 0;
 				background-size: <?php echo $new_width; ?>px;
 			}
 			<?php
