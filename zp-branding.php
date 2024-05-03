@@ -25,8 +25,8 @@ class zpBrandingOptions {
 	function __construct() {
 		purgeOption('width');// older version option name
 		purgeOption('restore');// older version option name
-		setOptionDefault('zpbranding-width', '200');
-		setThemeOptionDefault('zpbranding_customcss', '');
+		setOptionDefault('zpbranding_logo-width', '200');
+		setThemeOptionDefault('zpbranding_css-custom', '');
 	}
 
 	static function getOptionsSupported() {
@@ -34,16 +34,16 @@ class zpBrandingOptions {
 		if ( $zp_branding_logo ) {
 			$width = getimagesize($zp_branding_logo)[0];
 			$options = array(    
-					gettext_pl('Width', 'zp-branding') => array('key' => 'zpbranding-width', 'type' => OPTION_TYPE_TEXTBOX,
+					gettext_pl('Width', 'zp-branding') => array('key' => 'zpbranding_logo-width', 'type' => OPTION_TYPE_TEXTBOX,
 						'order'=> 1,
 						'desc' => gettext_pl('The width of the image (px). The height is proportional.', 'zp-branding')),
-					gettext_pl('Custom CSS', 'zp-branding') => array('key' => 'zpbranding_customcss', 'type' => OPTION_TYPE_TEXTAREA, 
+					gettext_pl('Custom CSS', 'zp-branding') => array('key' => 'zpbranding_css-custom', 'type' => OPTION_TYPE_TEXTAREA, 
 						'order' => 3,
 						'multilingual' => 0,
 						'desc' => gettext_pl('Enter custom CSS to alter the appearance of the admin area.<br> It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'zp-branding'))
 				);
-				if ( getOption('zpbranding-width') != $width ) {
-					$options[gettext_pl('Reset', 'zp-branding')] = array('key' => 'zpbranding-restore', 'type' => OPTION_TYPE_CHECKBOX,
+				if ( getOption('zpbranding_logo-width') != $width ) {
+					$options[gettext_pl('Reset', 'zp-branding')] = array('key' => 'zpbranding_logo-width-restore', 'type' => OPTION_TYPE_CHECKBOX,
 						'order' => 2,
 						'desc' => gettext_pl('Reset to the original width.', 'zp-branding'));
 				}			
@@ -59,9 +59,9 @@ class zpBrandingOptions {
 	function handleOptionSave() {
 		global $zp_branding_logo;
 		$width = getimagesize($zp_branding_logo)[0];
-		if (getOption('zpbranding-restore')) {
-			setOption('zpbranding-width', $width);
-			setOption('zpbranding-restore', 0);
+		if (getOption('zpbranding_logo-width-restore')) {
+			setOption('zpbranding_logo-width', $width);
+			setOption('zpbranding_logo-width-restore', 0);
 		}
 	}
 }
@@ -74,14 +74,14 @@ class zpBranding {
 			$width = getimagesize($zp_branding_logo)[0];
 			$height = getimagesize($zp_branding_logo)[1];
 			$ratio = round($height / $width, 2);
-			setOptionDefault('zpbranding-width', $width);
-			setOptionDefault('zpbranding-restore', 0);
-			if (getOption('zpbranding-width')) {
-				$new_width = getOption('zpbranding-width');
+			setOptionDefault('zpbranding_logo-width', $width);
+			setOptionDefault('zpbranding_logo-width-restore', 0);
+			if (getOption('zpbranding_logo-width')) {
+				$new_width = getOption('zpbranding_logo-width');
 				$height = ceil($new_width * $ratio);
 			} else {
 				$new_width = $width;
-				setOption('zpbranding-width', $width);
+				setOption('zpbranding_logo-width', $width);
 			}
 			?>
 			<style>
@@ -97,8 +97,8 @@ class zpBranding {
 				background-size: <?php echo $new_width; ?>px;
 			}
 			<?php
-			if ( !empty(getOption('zpbranding_customcss')) ) {
-				echo "\n/** Custom CSS **/\n" . getOption('zpbranding_customcss') . "\n" . "/****************/" . "\n";
+			if ( !empty(getOption('zpbranding_css-custom')) ) {
+				echo "\n/** Custom CSS **/\n" . getOption('zpbranding_css-custom') . "\n" . "/****************/" . "\n";
 			}
 			?>
 			</style>
