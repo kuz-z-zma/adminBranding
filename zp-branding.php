@@ -28,7 +28,7 @@ $option_interface = 'zpBrandingOptions';
 
 zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
 
-$zp_branding_logo = FULLWEBPATH . '/' . USER_PLUGIN_FOLDER . '/zp-branding/zp-admin-logo.png';
+$zp_branding_logo = FULLWEBPATH . '/' . ZENFOLDER . '/images/zen-logo.png';
 
 class zpBrandingOptions {
 	
