@@ -50,7 +50,7 @@ class zpBrandingOptions {
 		return $options;
 		} else { ?>
 			<div class="errorbox">
-			<?php echo sprintf(gettext_pl("Image <i>%s</i> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
+			<?php echo sprintf(gettext_pl("Image <em>%s</em> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
 			</div>
 		<?php
 		}
@@ -110,7 +110,7 @@ class zpBranding {
 			<?php
 		} else { ?>
 			<div class="errorbox">
-			<?php echo sprintf(gettext_pl("Image <i>%s</i> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
+			<?php echo sprintf(gettext_pl("Image <em>%s</em> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
 			</div>
 		<?php
 		}
