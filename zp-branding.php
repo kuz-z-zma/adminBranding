@@ -23,7 +23,7 @@ $plugin_is_filter = 5|ADMIN_PLUGIN;
 $plugin_description = gettext_pl("Customization of Zenphoto backend: custom Logo, custom Background, Text and Links styling. Option to include custom CSS to alter appearence of any element in Admin area.", "zp-branding");
 $plugin_author = "kuzzzma (ver. 2.0), fork of ver. 1.4 by Fred Sondaar (fretzl)";
 $plugin_version = '2.0';
-$plugin_category = gettext('Admin');
+$plugin_category = gettext_pl("Admin", "zp-branding");
 $option_interface = 'zpBrandingOptions';
 
 zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
