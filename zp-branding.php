@@ -152,24 +152,30 @@ class zpBrandingOptions {
             }
     }
 }
+
 class zpBranding {
 
-	static function printCustomZpLogo() {
-		global $zp_branding_logo;
-		if (getimagesize($zp_branding_logo)) {// Check if file is image
-			$width = getimagesize($zp_branding_logo)[0];
-			$height = getimagesize($zp_branding_logo)[1];
-			$ratio = round($height / $width, 2);
-			setOptionDefault('zpbranding_logo-width', $width);
-			setOptionDefault('zpbranding_logo-width-restore', 0);
-			if (getOption('zpbranding_logo-width')) {
-				$new_width = getOption('zpbranding_logo-width');
-				$height = ceil($new_width * $ratio);
-			} else {
-				$new_width = $width;
-				setOption('zpbranding_logo-width', $width);
-			}
-			?>
+    static function printCustomZpLogo() {
+        global $zp_branding_logo;
+        if ((getOption('zpbranding_logo-image') == 'custom') && (getOption('zpbranding_logo-custom') != '')) {
+            $zp_branding_logo = FULLWEBPATH.'/'.UPLOAD_FOLDER.'/design/'.getOption('zpbranding_logo-custom');
+        }
+
+        if (getimagesize($zp_branding_logo)) {// Check if file is image
+            $width = getimagesize($zp_branding_logo)[0];
+            $height = getimagesize($zp_branding_logo)[1];
+            $ratio = round($height / $width, 2);
+            setOptionDefault('zpbranding_logo-width', $width);
+            setOptionDefault('zpbranding_logo-width-restore', 0);
+            if (getOption('zpbranding_logo-width')) {
+                $new_width = getOption('zpbranding_logo-width');
+                $height = ceil($new_width * $ratio);
+            } else {
+                $new_width = $width;
+                setOption('zpbranding_logo-width', $width);
+            }
+            ?>
+
 			<style>
 			#logo {
 				display: none;
