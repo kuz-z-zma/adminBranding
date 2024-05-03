@@ -1,10 +1,13 @@
-zp-branding
+zp-branding (kuzzzma version)
 ===========
 
 A rework of zp-branding plugin for Zenphoto CMS for customization of backend.
 
 Version number upgraded to **2.0** as plugin was rewritten and completely changed logic of operation, by getting rid of included custom Logo image (to protect files from being overwritten on the update).
 Instead user can mix and match plugin Options to combine custom and default elements for their desired look.
+
+NB! Since our approaches to the task and customization needs are so different, 
+me and fretz have decided to keep projects separate (hence the rename).
 
 **WARNING**
 
