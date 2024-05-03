@@ -102,11 +102,7 @@ class zpBranding {
 			}
 			?>
 			</style>
-			<script>
-			document.addEventListener('DOMContentLoaded', function() { 
-				document.getElementById('logo').remove(); 
-			});
-			</script>
+
 			<?php
 		} else { ?>
 			<div class="errorbox">
