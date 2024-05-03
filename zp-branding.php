@@ -31,51 +31,127 @@ zp_register_filter('admin_head', 'zpBranding::printCustomZpLogo');
 $zp_branding_logo = FULLWEBPATH . '/' . ZENFOLDER . '/images/zen-logo.png';
 
 class zpBrandingOptions {
-	
-	function __construct() {
-		purgeOption('width');// older version option name
-		purgeOption('restore');// older version option name
-		setOptionDefault('zpbranding_logo-width', '200');
-		setThemeOptionDefault('zpbranding_css-custom', '');
-	}
 
-	static function getOptionsSupported() {
-		global $zp_branding_logo;
-		if ( $zp_branding_logo ) {
-			$width = getimagesize($zp_branding_logo)[0];
-			$options = array(    
-					gettext_pl('Width', 'zp-branding') => array('key' => 'zpbranding_logo-width', 'type' => OPTION_TYPE_TEXTBOX,
-						'order'=> 1,
-						'desc' => gettext_pl('The width of the image (px). The height is proportional.', 'zp-branding')),
-					gettext_pl('Custom CSS', 'zp-branding') => array('key' => 'zpbranding_css-custom', 'type' => OPTION_TYPE_TEXTAREA, 
-						'order' => 3,
-						'multilingual' => 0,
-						'desc' => gettext_pl('Enter custom CSS to alter the appearance of the admin area.<br> It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'zp-branding'))
-				);
-				if ( getOption('zpbranding_logo-width') != $width ) {
-					$options[gettext_pl('Reset', 'zp-branding')] = array('key' => 'zpbranding_logo-width-restore', 'type' => OPTION_TYPE_CHECKBOX,
-						'order' => 2,
-						'desc' => gettext_pl('Reset to the original width.', 'zp-branding'));
-				}			
-		return $options;
-		} else { ?>
-			<div class="errorbox">
-			<?php echo sprintf(gettext_pl("Image <em>%s</em> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
-			</div>
-		<?php
-		}
-	}
-	
-	function handleOptionSave() {
-		global $zp_branding_logo;
-		$width = getimagesize($zp_branding_logo)[0];
-		if (getOption('zpbranding_logo-width-restore')) {
-			setOption('zpbranding_logo-width', $width);
-			setOption('zpbranding_logo-width-restore', 0);
-		}
-	}
+    function __construct() {
+        setOptionDefault('zpbranding_logo-width', '200');
+        setOptionDefault('zpbranding_logo-image', 'default');
+        setOptionDefault('zpbranding_background-image', 'default');
+        setOptionDefault('zpbranding_background-repeat', '');
+        setOptionDefault('zpbranding_css-custom', '');
+    }
+
+    function getOptionsSupported() {
+        global $zp_branding_logo;
+        if ( $zp_branding_logo ) {
+        $width = getimagesize($zp_branding_logo)[0];
+        $options = array(
+
+/*---------------- Logo Options ----------------*/
+
+        gettext_pl('Logo for Admin', 'zp-branding') => array('key' => 'zpbranding_logo-image', 'type' => OPTION_TYPE_RADIO,
+            'order' => 1,
+            'buttons' => array(
+                gettext_pl('No Logo', 'zp-branding') => 'disabled',
+                gettext_pl('Custom Logo', 'zp-branding') => 'custom',
+                gettext_pl('Default Zenphoto Logo', 'zp-branding') => 'default'),
+            'desc' => gettext_pl('Choose if you want to use show Logo in Admin area.', 'zp-branding')),
+        gettext_pl('Admin Logo Width', 'zp-branding') => array('key' => 'zpbranding_logo-width', 'type' => OPTION_TYPE_TEXTBOX,
+            'order'=> 2,
+            'desc' => gettext_pl('The width of the Logo Image (in px). The height will be calculated proportionally.', 'zp-branding')),
+        gettext_pl('Choose Admin Logo Image', 'zp-branding') => array('key' => 'zpbranding_logo-custom', 'type' => OPTION_TYPE_CUSTOM, 
+            'order' => 4, 
+            'desc' => sprintf(gettext_pl('Select a Logo image (from files in the <em>%s</em> folder) or select to use a default Zenphoto Logo for Admin area. If you use elFinder plugin for Uploads - it can upload files to this folder, alternatively you can use FTP to upload your image file and then select it here.', 'zp-branding'),(UPLOAD_FOLDER.'/design/'))),
+        gettext_pl('Admin Logo Margins', 'zp-branding') => array('key' => 'zpbranding_margins', 'type' => OPTION_TYPE_TEXTBOX,
+          'order'=> 5,
+          'desc' => gettext_pl('Margins for Admin logo, listed as CSS <em>Margin shorthand</em> property values (WITHOUT final " ; " !). If no value provided - default Zenphoto values are used.', 'zp-branding')),
+
+/*---------------- Background Options ----------------*/
+
+        gettext_pl('Background Color for Admin', 'zp-branding') => array('key' => 'zpbranding_background-color', 'type' => OPTION_TYPE_TEXTBOX,
+          'order'=> 10,
+          'desc' => gettext_pl('Specify Background Color for Admin area by providing any value, accepted by CSS standarts (Hex, RGB, RGBA, HSL, HSLA, color names). If no value provided - default Zenphoto values are used.', 'zp-branding')),
+        gettext_pl('Background Image for Admin', 'zp-branding') => array('key' => 'zpbranding_background-image', 'type' => OPTION_TYPE_RADIO,
+          'order' => 11,
+          'buttons' => array(
+            gettext_pl('No Background Image', 'zp-branding') => 'disabled',
+            gettext_pl('Custom Image', 'zp-branding') => 'custom',
+            gettext_pl('Default Image', 'zp-branding') => 'default'),
+          'desc' => gettext_pl('Choose if you want to use Background image in Admin area.', 'zp-branding')),
+        gettext_pl('Choose Admin Background Image', 'zp-branding') => array('key' => 'zpbranding_background-custom', 'type' => OPTION_TYPE_CUSTOM, 
+          'order' => 12, 
+          'desc' => sprintf(gettext_pl('Select a background image (from files in the <em>%s</em> folder) or select to use a default Zenphoto Background for Admin area. If you use elFinder plugin for Uploads - it can upload files to this folder, alternatively you can use FTP to upload your image file and then select it here.', 'zp-branding'),(UPLOAD_FOLDER.'/design/'))),
+        gettext_pl('Background Image repeat options', 'zp-branding') => array('key' => 'zpbranding_background-repeat', 'type' => OPTION_TYPE_SELECTOR,
+          'order' => 13,
+          'selections' => array(
+            gettext_pl('Repeat vertically and horizontally', 'zp-branding') => 'repeat',
+            gettext_pl('Repeat X-axis (horizontally)', 'zp-branding') => 'repeat-x',
+            gettext_pl('Repeat Y-axis (vertically)', 'zp-branding') => 'repeat-y',
+            gettext_pl('No Repeating', 'zp-branding') => 'no-repeat',
+            gettext_pl('Fill/Stretch/Shrink', 'zp-branding') => 'round',
+            gettext_pl('Default', 'zp-branding') => ''),
+          'desc' => gettext_pl('Choose how Background Image will be repeated. Default is Repeat X-axis (horizontally).', 'zp-branding')),
+
+/*---------------- Links and Text Options ----------------*/
+
+        gettext_pl('Admin Text color', 'zp-branding') => array('key' => 'zpbranding_text-color', 'type' => OPTION_TYPE_TEXTBOX,
+          'order'=> 14,
+          'desc' => gettext_pl('Specify Text color for Admin Header and Footer text by providing any value, accepted by CSS standarts. If no value provided - default Zenphoto values are used.', 'zp-branding')),
+        gettext_pl('Admin Links color', 'zp-branding') => array('key' => 'zpbranding_links-color', 'type' => OPTION_TYPE_TEXTBOX,
+          'order'=> 15,
+          'desc' => gettext_pl('Specify Links color for Admin Header and Footer text by providing any value, accepted by CSS standarts. If no value provided - default Zenphoto values are used.', 'zp-branding')),
+        gettext_pl('Admin Links:hover color', 'zp-branding') => array('key' => 'zpbranding_links-hover', 'type' => OPTION_TYPE_TEXTBOX,
+          'order'=> 16,
+          'desc' => gettext_pl('Specify Links color on hover for Admin Header and Footer text by providing any value, accepted by CSS standarts. If no value provided - default Zenphoto values are used.', 'zp-branding')),
+
+/*---------------- CSS Options ----------------*/
+
+        gettext_pl('Custom CSS', 'zp-branding') => array('key' => 'zpbranding_css-custom', 'type' => OPTION_TYPE_TEXTAREA,
+          'order' => 17,
+          'multilingual' => 0,
+          'desc' => gettext_pl('Enter custom CSS to alter appearance of the Admin area further. It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'zp-branding'))
+        );
+
+        if (getOption('zpbranding_logo-width', 'zp-branding') != $width ) {
+            $options[gettext_pl('Restore Logo Width', 'zp-branding')] = array('key' => 'zpbranding_logo-width-restore', 'type' => OPTION_TYPE_CHECKBOX,
+            'order' => 3,
+            'desc' => gettext_pl('Restore Logo width to the original value.', 'zp-branding'));
+            }
+        return $options;
+        } else { ?>
+            <div class="errorbox">
+            <?php echo sprintf(gettext_pl("Image <em>%s</em> does not exist.", "zp-branding"), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
+            </div>
+        <?php }
+    }
+
+    function handleOption($option, $currentValue) {
+
+        if($option == "zpbranding_logo-custom") { ?>
+            <select id="zpbranding_logo-custom" name="zpbranding_logo-custom">
+            <option value="" style="background-color:LightGray"><?php echo gettext_pl('*Not specified', 'zp-branding'); ?></option>';
+            <?php zp_apply_filter('theme_head');
+            generateListFromFiles($currentValue, SERVERPATH.'/'.UPLOAD_FOLDER.'/design/','');	?>
+            </select>
+            <?php }
+
+        if($option == "zpbranding_background-custom") { ?>
+            <select id="zpbranding_background-custom" name="zpbranding_background-custom">
+            <option value="" style="background-color:LightGray"><?php echo gettext_pl('*Not specified', 'zp-branding'); ?></option>';
+            <?php zp_apply_filter('theme_head');
+            generateListFromFiles($currentValue, SERVERPATH.'/'.UPLOAD_FOLDER.'/design/','');	?>
+            </select>
+            <?php }
+    }
+
+    function handleOptionSave() {
+        global $zp_branding_logo;
+        $width = getimagesize($zp_branding_logo)[0];
+        if (getOption('zpbranding_logo-width-restore')) {
+            setOption('zpbranding_logo-width', $width);
+            setOption('zpbranding_logo-width-restore', 0);
+            }
+    }
 }
-
 class zpBranding {
 
 	static function printCustomZpLogo() {
