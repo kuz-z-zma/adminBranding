@@ -176,32 +176,86 @@ class zpBranding {
             }
             ?>
 
-			<style>
-			#logo {
-				display: none;
-			}
-		
-			#administration {
-				width: <?php echo $new_width; ?>px;
-				height: <?php echo $height; ?>px;
-				margin: 20px 10px 0px 30px;
-				background: url(<?php echo $zp_branding_logo; ?>) no-repeat 0 0;
-				background-size: <?php echo $new_width; ?>px;
-			}
-			<?php
-			if ( !empty(getOption('zpbranding_css-custom')) ) {
-				echo "\n/** Custom CSS **/\n" . getOption('zpbranding_css-custom') . "\n" . "/****************/" . "\n";
-			}
-			?>
-			</style>
+<style>
+    body {
+    <?php if (getOption('zpbranding_background-color') != '') { ?>
+        background-color: <?php echo getOption('zpbranding_background-color'); ?>;
+    <?php } ?>
+    <?php if (getOption('zpbranding_background-image') == 'disabled') { ?>
+        background-image: none;
+    <?php } elseif ((getOption('zpbranding_background-image') == 'custom') && (getOption('zpbranding_background-custom') != '')) {?>
+        background-image: url("<?php echo pathurlencode(WEBPATH.'/'.UPLOAD_FOLDER.'/design/'.getOption('zpbranding_background-custom')); ?>");
+    <?php } ?>
+    <?php if (getOption('zpbranding_background-repeat')!='') { ?>
+        background-repeat: <?php echo getOption('zpbranding_background-repeat'); ?>;
+    <?php } ?>
+    }
+    <?php if (getOption('zpbranding_text-color')!='') { ?>
+    #links,
+    #footer {
+        color: <?php echo getOption('zpbranding_text-color'); ?>;
+    }
+    <?php } ?>
 
-			<?php
-		} else { ?>
-			<div class="errorbox">
-			<?php echo sprintf(gettext_pl("Image <em>%s</em> does not exist.", 'zp-branding'), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
-			</div>
-		<?php
-		}
-	}
+    <?php if (getOption('zpbranding_links-color')!='') { ?>
+    #links a, 
+    #links a em, 
+    #footer a {
+        color: <?php echo getOption('zpbranding_links-color'); ?>;
+    }
+    <?php } ?>
+
+    <?php if (getOption('zpbranding_links-hover')!='') { ?>
+    #links a:hover, 
+    #links a:hover em, 
+    #footer a:hover {
+        color: <?php echo getOption('zpbranding_links-hover'); ?>;
+        text-decoration: none;
+        border-bottom: 1px solid <?php echo getOption('zpbranding_links-hover'); ?>;
+    }
+    <?php } ?>
+
+   <?php if (getOption('zpbranding_logo-image') == 'disabled') { ?>
+    #logo {
+        display: none; 
+    }
+    <?php } ?>
+    <?php if ((getOption('zpbranding_logo-image') == 'custom') && (getOption('zpbranding_logo-custom') != '')) {?>
+    #logo {
+        display: none;
+    }
+
+    #administration {
+        width: <?php echo $new_width; ?>px;
+        height: <?php echo $height; ?>px;
+        background: url("<?php echo pathurlencode(WEBPATH.'/'.UPLOAD_FOLDER.'/design/'.getOption('zpbranding_logo-custom')); ?>") no-repeat 0 0;
+        background-size: <?php echo $new_width; ?>px;
+    <?php if (getOption('zpbranding_margins')!='') { ?>
+        margin: <?php echo getOption('zpbranding_margins'); ?>;
+    <?php } ?>
+    }
+    <?php } ?>
+    <?php if (getOption('zpbranding_logo-image') == 'default') {?>
+    #administration {
+        width: <?php echo $new_width; ?>px;
+        height: <?php echo $height; ?>px;
+    <?php if (getOption('zpbranding_margins')!='') { ?>
+        margin: <?php echo getOption('zpbranding_margins'); ?>;
+    <?php } ?> 
+    } 
+    <?php } ?>
+
+<?php if ( !empty(getOption('zpbranding_css-custom')) ) {
+    echo "\n/**----------- Custom CSS -----------**/\n" . getOption('zpbranding_css-custom') . "\n" . "/*-----------End of Custom CSS-----------------*/" . "\n";
+   } ?>
+</style>
+
+    <?php } else { ?>
+        <div class="errorbox">
+        <?php echo sprintf(gettext_pl("Image <em>%s</em> does not exist.", "zp-branding"), substr($zp_branding_logo, strrpos($zp_branding_logo, '/') + 1)); ?>
+        </div>
+    <?php
+    }
+    }
 }
 ?>
