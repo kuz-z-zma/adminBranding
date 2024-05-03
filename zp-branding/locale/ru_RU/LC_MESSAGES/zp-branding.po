@@ -1,0 +1,258 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.0\n"
+"POT-Creation-Date: 2024-05-03 02:46+0300\n"
+"PO-Revision-Date: 2024-05-03 02:57+0300\n"
+"Last-Translator: kuzzzma\n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-KeywordsList: ;gettext_pl\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: zp-branding.php:23
+msgid ""
+"Customization of Zenphoto backend: custom Logo, custom Background, Text and "
+"Links styling. Option to include custom CSS to alter appearence of any "
+"element in Admin area."
+msgstr ""
+"Кастомизация Admin секции Zenphoto: ваше собственное Лого, Фон, цвета текста "
+"и ссылок. Возможность добавить CSS для модификации дизайна любого элемента в "
+"Admin."
+
+#: zp-branding.php:27
+msgid "Admin"
+msgstr "Admin"
+
+#: zp-branding.php:52
+msgid "Logo for Admin"
+msgstr "Лого для Admin секции"
+
+#: zp-branding.php:55
+msgid "No Logo"
+msgstr "Без Лого"
+
+#: zp-branding.php:56
+msgid "Custom Logo"
+msgstr "Собственное Лого"
+
+#: zp-branding.php:57
+msgid "Default Zenphoto Logo"
+msgstr "Лого Zenphoto"
+
+#: zp-branding.php:58
+msgid "Choose if you want to use show Logo in Admin area."
+msgstr "Выберите режим показа Лого в Admin секции."
+
+#: zp-branding.php:59
+msgid "Admin Logo Width"
+msgstr "Ширина Лого"
+
+#: zp-branding.php:61
+msgid ""
+"The width of the Logo Image (in px). The height will be calculated "
+"proportionally."
+msgstr ""
+"Ширина для Лого (в пикселях). Высота будет рассчитана автоматически и "
+"пропорционально."
+
+#: zp-branding.php:62
+msgid "Choose Admin Logo Image"
+msgstr "Выбрать файл Лого"
+
+#: zp-branding.php:64
+#, php-format
+msgid ""
+"Select a Logo image (from files in the <em>%s</em> folder) or select to use "
+"a default Zenphoto Logo for Admin area. If you use elFinder plugin for "
+"Uploads - it can upload files to this folder, alternatively you can use FTP "
+"to upload your image file and then select it here."
+msgstr ""
+"Выберите файл для использования в качестве Лого (из файлов в папке <em>%s</"
+"em> на сервере) или используйте Лого Zenphoto для Admin секции. Если вы "
+"используете elFinder плагин для Загрузок - вы можете загрузить требуемые "
+"файлы через веб-интерфейс в эту папку, в противном случае, загрузите файлы "
+"через FTP и потом выберете их в списке."
+
+#: zp-branding.php:65
+msgid "Admin Logo Margins"
+msgstr "Отступы для Лого"
+
+#: zp-branding.php:67
+msgid ""
+"Margins for Admin logo, listed as CSS <em>Margin shorthand</em> property "
+"values (WITHOUT final \" ; \" !). If no value provided - default Zenphoto "
+"values are used."
+msgstr ""
+"Введите параметры отступов для Лого в Admin секции используя CSS синтаксис "
+"для сокращенной записи свойства <em>margin</em> с использованием одного, "
+"двух, трёх или четырёх значений (Без закрывающего символа \" ; \" !). Если "
+"параметр не задан - используется стандартное значение Zenphoto."
+
+#: zp-branding.php:71
+msgid "Background Color for Admin"
+msgstr "Цвет Фона для Admin секции"
+
+#: zp-branding.php:73
+msgid ""
+"Specify Background Color for Admin area by providing any value, accepted by "
+"CSS standarts (Hex, RGB, RGBA, HSL, HSLA, color names). If no value provided "
+"- default Zenphoto values are used."
+msgstr ""
+"Введите код цвета Фона Admin секции, допустимо использование любого из "
+"стандартных форматов для CSS (Hex код, RGB, RGBA, HSL, HSLA, стандартные "
+"имена цветов). Если параметр не задан - используется стандартное значение "
+"Zenphoto."
+
+#: zp-branding.php:74
+msgid "Background Image for Admin"
+msgstr "Фон для Admin секции"
+
+#: zp-branding.php:77
+msgid "No Background Image"
+msgstr "Без Фона"
+
+#: zp-branding.php:78
+msgid "Custom Image"
+msgstr "Собственный Фон"
+
+#: zp-branding.php:79
+msgid "Default Image"
+msgstr "Фон Zenphoto"
+
+#: zp-branding.php:80
+msgid "Choose if you want to use Background image in Admin area."
+msgstr "Выбрать режим использования Фона в Admin секции."
+
+#: zp-branding.php:81
+msgid "Choose Admin Background Image"
+msgstr "Выбрать файл Фона"
+
+#: zp-branding.php:83
+#, php-format
+msgid ""
+"Select a background image (from files in the <em>%s</em> folder) or select "
+"to use a default Zenphoto Background for Admin area. If you use elFinder "
+"plugin for Uploads - it can upload files to this folder, alternatively you "
+"can use FTP to upload your image file and then select it here."
+msgstr ""
+"Выберите файл для использования в качестве Фона (из файлов в папке <em>%s</"
+"em> на сервере) или используйте Лого Zenphoto для Admin секции. Если вы "
+"используете elFinder плагин для Загрузок - вы можете загрузить требуемые "
+"файлы через веб-интерфейс в эту папку, в противном случае, загрузите файлы "
+"через FTP и потом выберете их в списке."
+
+#: zp-branding.php:84
+msgid "Background Image repeat options"
+msgstr "Режим повторения Фона"
+
+#: zp-branding.php:87
+msgid "Repeat vertically and horizontally"
+msgstr "Повторение вертикально и горизонтально"
+
+#: zp-branding.php:88
+msgid "Repeat X-axis (horizontally)"
+msgstr "Повтор по оси X (горизонтально)"
+
+#: zp-branding.php:89
+msgid "Repeat Y-axis (vertically)"
+msgstr "Повтор по оси Y (вертикально)"
+
+#: zp-branding.php:90
+msgid "No Repeating"
+msgstr "Без повтора"
+
+#: zp-branding.php:91
+msgid "Fill/Stretch/Shrink"
+msgstr "Заполнение"
+
+#: zp-branding.php:92
+msgid "Default"
+msgstr "Стандартный"
+
+#: zp-branding.php:93
+msgid ""
+"Choose how Background Image will be repeated. Default is Repeat X-axis "
+"(horizontally)."
+msgstr ""
+"Выберите режим повторения изображения на Фоне в Admin секции. Стандартный "
+"режим: повтор по оси X (горизонтально)"
+
+#: zp-branding.php:97
+msgid "Admin Text color"
+msgstr "Цвет текста"
+
+#: zp-branding.php:99
+msgid ""
+"Specify Text color for Admin Header and Footer text by providing any value, "
+"accepted by CSS standarts. If no value provided - default Zenphoto values "
+"are used."
+msgstr ""
+"Введите код цвета для текста в зоне Header и Footer Admin, допустимо "
+"использование любого из стандартных форматов для CSS (Hex код, RGB, RGBA, "
+"HSL, HSLA, стандартные имена цветов). Если параметр не задан - используется "
+"стандартное значение Zenphoto."
+
+#: zp-branding.php:100
+msgid "Admin Links color"
+msgstr "Цвет ссылок"
+
+#: zp-branding.php:102
+msgid ""
+"Specify Links color for Admin Header and Footer text by providing any value, "
+"accepted by CSS standarts. If no value provided - default Zenphoto values "
+"are used."
+msgstr ""
+"Введите код цвета для ссылок в зоне Header и Footer Admin, допустимо "
+"использование любого из стандартных форматов для CSS. Если параметр не задан "
+"- используется стандартное значение Zenphoto."
+
+#: zp-branding.php:103
+msgid "Admin Links:hover color"
+msgstr "Цвет ссылок (при наведении мышью)"
+
+#: zp-branding.php:105
+msgid ""
+"Specify Links color on hover for Admin Header and Footer text by providing "
+"any value, accepted by CSS standarts. If no value provided - default "
+"Zenphoto values are used."
+msgstr ""
+"Введите код цвета для ссылок (при наведении мышью) в зоне Header и Footer "
+"Admin, допустимо использование любого из стандартных форматов для CSS. Если "
+"параметр не задан - используется стандартное значение Zenphoto."
+
+#: zp-branding.php:109
+msgid "Custom CSS"
+msgstr "Ваш правила для CSS в Admin секции"
+
+#: zp-branding.php:112
+msgid ""
+"Enter custom CSS to alter appearance of the Admin area further. It is "
+"printed between &lt;style&gt; tags in the &lt;head&gt; section."
+msgstr ""
+"Введите ваш код CSS для использования в Admin секции для внесения любых "
+"других изменений. Код будет добавлен между &lt;style&gt; тегами в &lt;"
+"head&gt; зоне."
+
+#: zp-branding.php:116
+msgid "Restore Logo Width"
+msgstr "Восстановить ширину Лого"
+
+#: zp-branding.php:118
+msgid "Restore Logo width to the original value."
+msgstr "Восстановите оригинальное значение для Ширины Лого."
+
+#: zp-branding.php:123 zp-branding.php:256
+#, php-format
+msgid "Image <em>%s</em> does not exist."
+msgstr "Изображение <em>%s</em> не существует."
+
+#: zp-branding.php:132 zp-branding.php:140
+msgid "*Not specified"
+msgstr "*Не выбрано"
