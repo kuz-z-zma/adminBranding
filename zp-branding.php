@@ -1,18 +1,28 @@
 <?php
-/**
- * Replacement of the Zenphoto logo on the backend with a custom logo.
+/*
+ * Version 2.0 was completely rewritten and changes logic of operation, by getting rid of included custom Logo image (to protect files from being overwritten on the update).
+ * Instead user can mix and match plugin Options to combine custom and default elements for their desired look.
  *
- * Name the logo <code>zp-admin-logo.png</code> and place it in the <code>/plugins/zp-branding</code> folder.
+ * Custom Logo and Background files should be placed in "/uploaded/design" folder of your Zenphoto install (check name of folder specific to your install in notes for relevant Options).
+ * 
+ * You can select Custom files to use, use Default Logo and Background or disable them altogether.
+ * Specify new Width for Logo to change it's scale if needed.
+ * Specify Margins for Logo by by providing standart CSS Margin shorthand property ("20px 0 10px 20px", or any variation with 1/2/3 values) without the closing ";" character.
  *
- * @author Fred Sondaar (fretzl)
+ * Custom colors for Links and Text target only small text in Header and Footer of Admin area.
+ * Provide any value, accepted by CSS standarts (Hex, RGB, RGBA, HSL, HSLA, color names).
+ *
+ * Custom CSS allows to further change appearence of any Admin area elements.
+ *
+ * @author kuzzzma (ver. 2.0), originally by Fred Sondaar (fretzl)
  * @package plugins
  * @subpackage admin
  */
 
 $plugin_is_filter = 5|ADMIN_PLUGIN;
-$plugin_description = gettext_pl("Replace the default Zenphoto logo on the backend with a custom logo.", 'zp-branding');
-$plugin_author = "Fred Sondaar (fretzl)";
-$plugin_version = '1.4';
+$plugin_description = gettext_pl("Customization of Zenphoto backend: custom Logo, custom Background, Text and Links styling. Option to include custom CSS to alter appearence of any element in Admin area.", "zp-branding");
+$plugin_author = "kuzzzma (ver. 2.0), fork of ver. 1.4 by Fred Sondaar (fretzl)";
+$plugin_version = '2.0';
 $plugin_category = gettext('Admin');
 $option_interface = 'zpBrandingOptions';
 
