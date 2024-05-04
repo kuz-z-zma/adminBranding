@@ -30,4 +30,4 @@ Custom Logo and Background files should be placed in "/uploaded/design" folder o
 **Screenshot**
 Options and their effect:
 
-![zp-branding-settings](https://github.com/kuz-z-zma/zp-branding/assets/75898540/a459876f-4d85-4023-97fb-33dd6ad5f14d)
+![admin-branding-settings](https://github.com/kuz-z-zma/adminBranding/assets/75898540/8e0d5f9f-5d16-4ee4-bc4a-494380ea62d9)
