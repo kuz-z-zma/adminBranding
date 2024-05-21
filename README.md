@@ -13,6 +13,7 @@ It was tested with latest Zenphoto version 1.6.3a.
 **Links:** 
  - [adminBranding thread on Zenphoto forum](https://forum.zenphoto.org/discussion/1411210/new-plugin-adminbranding)
  - [adminBranding in Zenphoto Extensions](https://www.zenphoto.org/news/adminbranding/)
+ - [adminBranding page at my personal blog](https://www.blog.private-universe.net/web-and-tech/zenphoto-plugin-adminbranding/)
 
 **What it does differently from zp-branding:**
 
