@@ -27,9 +27,10 @@ It was tested with latest Zenphoto version 1.6.3a.
  - Logo for Admin (Default, Custom, No logo) with ability to specify width and margins.
  - Background styling for Admin (Default image, Custom image, No image, Image repeat behaviour, Color)
  - Styling of Text and Links in Admin.
- - Custom CSS for further alterations.
+ - Custom inline CSS.
+ - Custom CSS file for further alterations
  - Supports translation, and I've provided one for Russian (ru_RU).
- - Custom Logo and Background files should be placed in "/uploaded/design" folder of your Zenphoto install (see more info on [UPLOAD FOLDER](https://www.zenphoto.org/news/path-constants/) of Zenphoto).
+ - Custom Logo, Background images and CSS files should be placed in "/uploaded/design" folder of your Zenphoto install (see more info on [UPLOAD FOLDER](https://www.zenphoto.org/news/path-constants/) of Zenphoto).
 
 **Installation:**
 
