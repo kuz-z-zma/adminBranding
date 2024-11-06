@@ -185,34 +185,34 @@ class adminbranding {
 
 <style>
     body {
-    <?php if (getOption('adminbranding_background-color') != '') { ?>
+<?php if (getOption('adminbranding_background-color') != '') { ?>
         background-color: <?php echo getOption('adminbranding_background-color'); ?>;
-    <?php } ?>
-    <?php if (getOption('adminbranding_background-image') == 'disabled') { ?>
+<?php } ?>
+<?php if (getOption('adminbranding_background-image') == 'disabled') { ?>
         background-image: none;
-    <?php } elseif ((getOption('adminbranding_background-image') == 'custom') && (getOption('adminbranding_background-custom') != '')) {?>
+<?php } elseif ((getOption('adminbranding_background-image') == 'custom') && (getOption('adminbranding_background-custom') != '')) {?>
         background-image: url("<?php echo pathurlencode(WEBPATH.'/'.UPLOAD_FOLDER.'/design/'.getOption('adminbranding_background-custom')); ?>");
-    <?php } ?>
-    <?php if (getOption('adminbranding_background-repeat')!='') { ?>
+<?php } ?>
+<?php if (getOption('adminbranding_background-repeat')!='') { ?>
         background-repeat: <?php echo getOption('adminbranding_background-repeat'); ?>;
-    <?php } ?>
-    }
-    <?php if (getOption('adminbranding_text-color')!='') { ?>
+<?php } ?> }
+
+<?php if (getOption('adminbranding_text-color')!='') { ?>
     #links,
     #footer {
         color: <?php echo getOption('adminbranding_text-color'); ?>;
     }
-    <?php } ?>
+<?php } ?>
 
-    <?php if (getOption('adminbranding_links-color')!='') { ?>
+<?php if (getOption('adminbranding_links-color')!='') { ?>
     #links a, 
     #links a em, 
     #footer a {
         color: <?php echo getOption('adminbranding_links-color'); ?>;
     }
-    <?php } ?>
+<?php } ?>
 
-    <?php if (getOption('adminbranding_links-hover')!='') { ?>
+<?php if (getOption('adminbranding_links-hover')!='') { ?>
     #links a:hover, 
     #links a:hover em, 
     #footer a:hover {
@@ -220,14 +220,14 @@ class adminbranding {
         text-decoration: none;
         border-bottom: 1px solid <?php echo getOption('adminbranding_links-hover'); ?>;
     }
-    <?php } ?>
+<?php } ?>
 
-   <?php if (getOption('adminbranding_logo-image') == 'disabled') { ?>
+<?php if (getOption('adminbranding_logo-image') == 'disabled') { ?>
     #logo {
         display: none; 
     }
-    <?php } ?>
-    <?php if ((getOption('adminbranding_logo-image') == 'custom') && (getOption('adminbranding_logo-custom') != '')) {?>
+<?php } ?>
+<?php if ((getOption('adminbranding_logo-image') == 'custom') && (getOption('adminbranding_logo-custom') != '')) {?>
     #logo {
         display: none;
     }
@@ -237,32 +237,29 @@ class adminbranding {
         height: <?php echo $height; ?>px;
         background: url("<?php echo pathurlencode(WEBPATH.'/'.UPLOAD_FOLDER.'/design/'.getOption('adminbranding_logo-custom')); ?>") no-repeat 0 0;
         background-size: <?php echo $new_width; ?>px;
-    <?php if (getOption('adminbranding_margins')!='') { ?>
+<?php if (getOption('adminbranding_margins')!='') { ?>
         margin: <?php echo getOption('adminbranding_margins'); ?>;
-    <?php } ?>
-    }
-    <?php } ?>
-    <?php if (getOption('adminbranding_logo-image') == 'default') {?>
+<?php } ?> }
+<?php } ?>
+<?php if (getOption('adminbranding_logo-image') == 'default') { ?>
     #administration {
         width: <?php echo $new_width; ?>px;
         height: <?php echo $height; ?>px;
-    <?php if (getOption('adminbranding_margins')!='') { ?>
+<?php if (getOption('adminbranding_margins')!='') { ?>
         margin: <?php echo getOption('adminbranding_margins'); ?>;
-    <?php } ?> 
-    } 
-    <?php } ?>
+<?php } ?> }
+<?php } ?>
 
 <?php if ( !empty(getOption('adminbranding_css-custom')) ) {
     echo "\n/**----------- Custom CSS -----------**/\n" . getOption('adminbranding_css-custom') . "\n" . "/*-----------End of Custom CSS-----------------*/" . "\n";
    } ?>
 </style>
 
-    <?php } else { ?>
+<?php } else { ?>
         <div class="errorbox">
         <?php echo sprintf(gettext_pl("Image <em>%s</em> does not exist.", "admin-branding"), substr($zp_adminbranding_logo, strrpos($zp_adminbranding_logo, '/') + 1)); ?>
         </div>
-    <?php
-    }
+<?php }
     }
 }
 ?>
