@@ -30,9 +30,9 @@ $plugin_category = gettext_pl("Admin", "admin-branding");
 $option_interface = 'adminbrandingOptions';
 
 if ($plugin_disable) {
-	enableExtension('adminBranding', 0);
+    enableExtension('adminBranding', 0);
 } else {
-	zp_register_filter('admin_head', 'adminbranding::printCustomAdminLogo');
+    zp_register_filter('admin_head', 'adminbranding::printCustomAdminLogo');
 }
 
 $zp_adminbranding_logo = FULLWEBPATH . '/' . ZENFOLDER . '/images/zen-logo.png';
@@ -69,53 +69,56 @@ class adminbrandingOptions {
             'order' => 4, 
             'desc' => sprintf(gettext_pl('Select a Logo image (from files in the <em>%s</em> folder) or select to use a default Zenphoto Logo for Admin area.<br>If you use elFinder plugin for Uploads - it can upload files to this folder, alternatively you can use FTP to upload your image file and then select it here.', 'admin-branding'),(UPLOAD_FOLDER.'/design/'))),
         gettext_pl('Admin Logo Margins', 'admin-branding') => array('key' => 'adminbranding_margins', 'type' => OPTION_TYPE_TEXTBOX,
-          'order'=> 5,
-          'desc' => gettext_pl('Margins for Admin logo, listed as CSS <em>Margin shorthand</em> property values (WITHOUT final " ; " !). If no value provided - default Zenphoto values are used.', 'admin-branding')),
+            'order'=> 5,
+            'desc' => gettext_pl('Margins for Admin logo, listed as CSS <em>Margin shorthand</em> property values (WITHOUT final " ; " !). If no value provided - default Zenphoto values are used.', 'admin-branding')),
 
 /*---------------- Background Options ----------------*/
 
         gettext_pl('Background Color for Admin', 'admin-branding') => array('key' => 'adminbranding_background-color', 'type' => OPTION_TYPE_TEXTBOX,
-          'order'=> 10,
-          'desc' => gettext_pl('Specify Background Color for Admin area by providing any value, accepted by CSS standarts (Hex, RGB, RGBA, HSL, HSLA, color names).<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
+            'order'=> 10,
+            'desc' => gettext_pl('Specify Background Color for Admin area by providing any value, accepted by CSS standarts (Hex, RGB, RGBA, HSL, HSLA, color names).<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
         gettext_pl('Background Image for Admin', 'admin-branding') => array('key' => 'adminbranding_background-image', 'type' => OPTION_TYPE_RADIO,
-          'order' => 11,
-          'buttons' => array(
-            gettext_pl('No Background Image', 'admin-branding') => 'disabled',
-            gettext_pl('Custom Image', 'admin-branding') => 'custom',
-            gettext_pl('Default Image', 'admin-branding') => 'default'),
-          'desc' => gettext_pl('Choose if you want to use Background image in Admin area.', 'admin-branding')),
+            'order' => 11,
+            'buttons' => array(
+                gettext_pl('No Background Image', 'admin-branding') => 'disabled',
+                gettext_pl('Custom Image', 'admin-branding') => 'custom',
+                gettext_pl('Default Image', 'admin-branding') => 'default'),
+            'desc' => gettext_pl('Choose if you want to use Background image in Admin area.', 'admin-branding')),
         gettext_pl('Choose Admin Background Image', 'admin-branding') => array('key' => 'adminbranding_background-custom', 'type' => OPTION_TYPE_CUSTOM, 
-          'order' => 12, 
-          'desc' => sprintf(gettext_pl('Select a background image (from files in the <em>%s</em> folder) or select to use a default Zenphoto Background for Admin area.<br>If you use elFinder plugin for Uploads - it can upload files to this folder, alternatively you can use FTP to upload your image file and then select it here.', 'admin-branding'),(UPLOAD_FOLDER.'/design/'))),
+            'order' => 12, 
+            'desc' => sprintf(gettext_pl('Select a background image (from files in the <em>%s</em> folder) or select to use a default Zenphoto Background for Admin area.<br>If you use elFinder plugin for Uploads - it can upload files to this folder, alternatively you can use FTP to upload your image file and then select it here.', 'admin-branding'),(UPLOAD_FOLDER.'/design/'))),
         gettext_pl('Background Image repeat options', 'admin-branding') => array('key' => 'adminbranding_background-repeat', 'type' => OPTION_TYPE_SELECTOR,
-          'order' => 13,
-          'selections' => array(
-            gettext_pl('Repeat vertically and horizontally', 'admin-branding') => 'repeat',
-            gettext_pl('Repeat X-axis (horizontally)', 'admin-branding') => 'repeat-x',
-            gettext_pl('Repeat Y-axis (vertically)', 'admin-branding') => 'repeat-y',
-            gettext_pl('No Repeating', 'admin-branding') => 'no-repeat',
-            gettext_pl('Fill/Stretch/Shrink', 'admin-branding') => 'round',
-            gettext_pl('Default', 'admin-branding') => ''),
-          'desc' => gettext_pl('Choose how Background Image will be repeated. Default is Repeat X-axis (horizontally).', 'admin-branding')),
+            'order' => 13,
+            'selections' => array(
+                gettext_pl('Repeat vertically and horizontally', 'admin-branding') => 'repeat',
+                gettext_pl('Repeat X-axis (horizontally)', 'admin-branding') => 'repeat-x',
+                gettext_pl('Repeat Y-axis (vertically)', 'admin-branding') => 'repeat-y',
+                gettext_pl('No Repeating', 'admin-branding') => 'no-repeat',
+                gettext_pl('Fill/Stretch/Shrink', 'admin-branding') => 'round',
+                gettext_pl('Default', 'admin-branding') => ''),
+            'desc' => gettext_pl('Choose how Background Image will be repeated. Default is Repeat X-axis (horizontally).', 'admin-branding')),
 
 /*---------------- Links and Text Options ----------------*/
 
         gettext_pl('Admin Text color', 'admin-branding') => array('key' => 'adminbranding_text-color', 'type' => OPTION_TYPE_TEXTBOX,
-          'order'=> 14,
-          'desc' => gettext_pl('Specify Text color for Admin Header and Footer text by providing any value, accepted by CSS standarts.<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
+            'order'=> 14,
+            'desc' => gettext_pl('Specify Text color for Admin Header and Footer text by providing any value, accepted by CSS standarts.<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
         gettext_pl('Admin Links color', 'admin-branding') => array('key' => 'adminbranding_links-color', 'type' => OPTION_TYPE_TEXTBOX,
-          'order'=> 15,
-          'desc' => gettext_pl('Specify Links color for Admin Header and Footer text by providing any value, accepted by CSS standarts.<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
+            'order'=> 15,
+            'desc' => gettext_pl('Specify Links color for Admin Header and Footer text by providing any value, accepted by CSS standarts.<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
         gettext_pl('Admin Links:hover color', 'admin-branding') => array('key' => 'adminbranding_links-hover', 'type' => OPTION_TYPE_TEXTBOX,
-          'order'=> 16,
-          'desc' => gettext_pl('Specify Links color on hover for Admin Header and Footer text by providing any value, accepted by CSS standarts.<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
+            'order'=> 16,
+            'desc' => gettext_pl('Specify Links color on hover for Admin Header and Footer text by providing any value, accepted by CSS standarts.<br>If no value provided - default Zenphoto values are used.', 'admin-branding')),
 
 /*---------------- CSS Options ----------------*/
 
         gettext_pl('Custom CSS', 'admin-branding') => array('key' => 'adminbranding_css-custom', 'type' => OPTION_TYPE_TEXTAREA,
-          'order' => 17,
-          'multilingual' => 0,
-          'desc' => gettext_pl('Enter custom CSS to alter appearance of the Admin area further. It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'admin-branding'))
+            'order' => 17,
+            'multilingual' => 0,
+            'desc' => gettext_pl('Enter custom CSS to alter appearance of the Admin area further. It is printed between &lt;style&gt; tags in the &lt;head&gt; section.', 'admin-branding')),
+        gettext_pl('Custom CSS File', 'admin-branding') => array('key' => 'adminbranding_css-custom-file', 'type' => OPTION_TYPE_CUSTOM,
+            'order' => 18,
+            'desc' => sprintf(gettext_pl('Select your custom CSS file (from CSS files in the <em>%s</em> folder).<br>If you use elFinder plugin for Uploads - it can upload files to this folder, alternatively you can use FTP to upload your CSS files and then select it here.', 'admin-branding'),(UPLOAD_FOLDER.'/design/')))
         );
 
         if (getOption('adminbranding_logo-width', 'admin-branding') != $width ) {
@@ -135,17 +138,25 @@ class adminbrandingOptions {
 
         if($option == "adminbranding_logo-custom") { ?>
             <select id="adminbranding_logo-custom" name="adminbranding_logo-custom">
-            <option value="" style="background-color:LightGray"><?php echo gettext_pl('*Not specified', 'admin-branding'); ?></option>';
-            <?php zp_apply_filter('theme_head');
-            generateListFromFiles($currentValue, SERVERPATH.'/'.UPLOAD_FOLDER.'/design/','');	?>
+                <option value="" style="background-color:LightGray"><?php echo gettext_pl('*Not specified', 'admin-branding'); ?></option>';
+                <?php zp_apply_filter('theme_head');
+                generateListFromFiles($currentValue, SERVERPATH.'/'.UPLOAD_FOLDER.'/design/','');	?>
             </select>
             <?php }
 
         if($option == "adminbranding_background-custom") { ?>
             <select id="adminbranding_background-custom" name="adminbranding_background-custom">
-            <option value="" style="background-color:LightGray"><?php echo gettext_pl('*Not specified', 'admin-branding'); ?></option>';
-            <?php zp_apply_filter('theme_head');
-            generateListFromFiles($currentValue, SERVERPATH.'/'.UPLOAD_FOLDER.'/design/','');	?>
+                <option value="" style="background-color:LightGray"><?php echo gettext_pl('*Not specified', 'admin-branding'); ?></option>';
+                <?php zp_apply_filter('theme_head');
+                generateListFromFiles($currentValue, SERVERPATH.'/'.UPLOAD_FOLDER.'/design/','');	?>
+            </select>
+            <?php }
+        
+        if($option == "adminbranding_css-custom-file") { ?>
+            <select id="adminbranding_css-custom-file" name="adminbranding_css-custom-file">
+                <option value="" style="background-color:LightGray"><?php echo gettext_pl('* no custom CSS file', 'admin-branding'); ?></option>';
+                <?php zp_apply_filter('theme_head');
+                generateListFromFiles($currentValue, SERVERPATH.'/'.UPLOAD_FOLDER.'/design/','.css'); ?>
             </select>
             <?php }
     }
@@ -182,6 +193,10 @@ class adminbranding {
                 setOption('adminbranding_logo-width', $width);
             }
             ?>
+
+<?php if (!empty(getOption('adminbranding_css-custom-file'))) { ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo pathurlencode(WEBPATH.'/'.UPLOAD_FOLDER.'/design/'.getOption('adminbranding_css-custom-file')); echo ('.css') ?>" />
+   <?php } ?>
 
 <style>
     body {
