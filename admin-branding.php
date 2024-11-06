@@ -4,7 +4,7 @@
  * Inspired by zp-branding plugin, adminBranding was completely rewritten and changes logic of operation, by getting rid of included custom Logo image (to protect files from being overwritten on the update).
  * Instead user can mix and match plugin Options to combine custom and default elements for their desired look.
  *
- * Custom Logo and Background files should be placed in "/uploaded/design" folder of your Zenphoto install (check name of folder specific to your install in notes for relevant Options).
+ * Custom Logo, Background and CSS files should be placed in "/uploaded/design" folder of your Zenphoto install (check name of folder specific to your install in notes for relevant Options).
  * 
  * You can select Custom files to use, use Default Logo and Background or disable them altogether.
  * Specify new Width for Logo to change it's scale if needed.
@@ -14,6 +14,10 @@
  * Provide any value, accepted by CSS standarts (Hex, RGB, RGBA, HSL, HSLA, color names).
  *
  * Custom CSS allows to further change appearence of any Admin area elements.
+ *
+ * ## Installation:
+ * 
+ * Place the file `admin-branding.php` and `/admin-branding/` folder into `/plugins/` directory of your Zenphoto install, enable plugin in the Zenphoto options and customize plugin options to suit your vision.
  *
  * @author kuzzzma, based on zp-branding v1.4 plugin by Fred Sondaar (fretzl)
  * @package plugins
@@ -25,7 +29,8 @@ $plugin_description = gettext_pl("Customization of Zenphoto backend: custom Logo
 $plugin_author = "kuzzzma, based on ver. 1.4 zp-branding plugin by Fred Sondaar (fretzl)";
 $plugin_siteurl = 'https://github.com/kuz-z-zma/adminBranding';
 $plugin_disable = (zp_has_filter('admin_head') && extensionEnabled('zp-branding')) ? gettext_pl('Only one Zenphoto backend customization plugin may be enabled. Please disable zp-branding plugin to use this one.','admin-branding') : '';
-$plugin_notice = gettext_pl('Make sure not to enable both zp-branding and admin-branding at the same time to avoid conflicts.','admin-branding');
+$plugin_notice = gettext_pl('Make sure NOT to enable both zp-branding and admin-branding at the same time to avoid conflicts.','admin-branding');
+$plugin_version = '1.1';
 $plugin_category = gettext_pl("Admin", "admin-branding");
 $option_interface = 'adminbrandingOptions';
 
